@@ -372,7 +372,7 @@ foreach ($file in $mp4Files) {
 
   # Set the input and output filenames
   #$inputFile = $file
-  $outputFile = "$($inputFile.BaseName)_enc.mp4"
+  $outputFile = "$($inputFile.LastWriteTime.ToString('yyyyMMdd_HHmmss'))_$($inputFile.BaseName)_enc.mp4"
 
   # Set the output file path
   $outputFile = Join-Path $inputDirectory $outputFile
@@ -418,7 +418,7 @@ foreach ($file in $mp4Files) {
   #$outputFile = "$($inputFile.BaseName).mp4"
 
   # Set the ExifTool arguments
-  $arguments = "-ee -overwrite_original -api largefilesupport=1 `"-filemodifydate<datetimeoriginal`" `"-filecreatedate<datetimeoriginal`" `"$outputFile`""
+  $arguments = "-ee -overwrite_original -api largefilesupport=1 `"-alldates<filename`" `"$outputFile`""
   Write-Output "$arguments"
   $arguments = $arguments.Split(" ")
 
